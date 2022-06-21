@@ -1,0 +1,63 @@
+{% extends 'main/base.html' %}
+{% load static %}
+{% block content %}
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-giJF6kkoqNQ00vy+HMDP7azOuL0xtbfIcaT9wjKHr8RbDVddVHyTfAAsrekwKmP1" crossorigin="anonymous">
+
+    <title>Trashkuha</title>
+    <style>
+        body {
+            background: url('{% static "main/images/TrashKuha Form.png" %}') no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            background-size: cover;
+            -o-background-size: cover;
+        }
+     
+
+    </style>
+  </head>
+  <body id="overlay">
+
+
+{% if user.is_authenticated %}
+  <h1>Booking Form</h1>
+<br/><br/>
+
+{% if submitted %}
+    Your Booking Was Submitted Succefully!!!
+
+  {% else %}
+
+  <form action="" method=POST>
+      {% csrf_token %}
+
+      {{ form.as_p  }}
+
+      <input type="submit" value="Submit" class="btn btn-secondary">
+
+  </form>
+    {% endif %}
+
+<br/><br/>  
+
+{% else %}
+<h1>Sorry! You Must Be Logged In To View This Page...</h1>
+
+<a href="{% url 'login' %}">Login Here</a>
+
+{% endif %}
+
+
+{% endblock %}
+
+</body>
+</html>
